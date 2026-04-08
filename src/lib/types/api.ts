@@ -219,3 +219,131 @@ export interface MessageInfo {
   title: string;
   subtitle: string;
 }
+
+// ========== Postpaid Inquiry ==========
+
+export interface PostpaidInquiryRequest {
+  serviceType: string;
+  target: string;
+  providerId?: string;
+}
+
+export interface PostpaidInquiryResponse {
+  inquiry: PostpaidInquiryInfo;
+  bill: BillInfo;
+  notices: NoticeInfo[];
+}
+
+export interface PostpaidInquiryInfo {
+  inquiryId: string | null;
+  serviceType: string;
+  target: string;
+  targetValid: boolean;
+  customer?: CustomerInfo;
+  errorMessage?: string;
+  expiresAt?: string;
+}
+
+export interface BillInfo {
+  period: string;
+  periodFormatted?: string;
+  amount: number;
+  amountFormatted: string;
+  adminFee: number;
+  adminFeeFormatted: string;
+  totalAmount: number;
+  totalAmountFormatted: string;
+  details: BillDetailRow[];
+}
+
+export interface BillDetailRow {
+  label: string;
+  value: string;
+}
+
+// ========== Postpaid Pay ==========
+
+export interface PostpaidPayRequest {
+  inquiryId: string;
+  pin?: string;
+}
+
+export interface PostpaidPayResponse {
+  transaction: TransactionInfo;
+  bill: BillInfo;
+  target: TransactionTargetInfo;
+  payment: TransactionPaymentInfo;
+  receipt: ReceiptInfo;
+  message: MessageInfo;
+}
+
+// ========== Transfer ==========
+
+export interface TransferInquiryRequest {
+  bankCode: string;
+  accountNumber: string;
+  amount: number;
+}
+
+export interface TransferInquiryResponse {
+  inquiry: TransferInquiryInfo;
+  pricing: PricingInfo;
+  payment: PaymentInfo;
+  pinRequired: boolean;
+}
+
+export interface TransferInquiryInfo {
+  inquiryId: string;
+  bankCode: string;
+  bankName: string;
+  bankIcon?: string;
+  accountNumber: string;
+  accountName: string;
+  amount: number;
+  amountFormatted: string;
+  expiresAt?: string;
+}
+
+export interface TransferExecuteRequest {
+  inquiryId: string;
+  pin?: string;
+}
+
+export interface TransferExecuteResponse {
+  transaction: TransactionInfo;
+  transfer: {
+    bankName: string;
+    accountNumber: string;
+    accountName: string;
+    amount: number;
+    amountFormatted: string;
+  };
+  payment: TransactionPaymentInfo;
+  receipt: ReceiptInfo;
+  message: MessageInfo;
+}
+
+// ========== Contacts ==========
+
+export interface ContactResponse {
+  id: string;
+  type: string;
+  name: string;
+  number: string;
+  metadata?: Record<string, string>;
+}
+
+export interface SaveContactRequest {
+  type: string;
+  name: string;
+  number: string;
+  metadata?: Record<string, string>;
+}
+
+// ========== Bank ==========
+
+export interface BankInfo {
+  code: string;
+  name: string;
+  icon?: string;
+}
