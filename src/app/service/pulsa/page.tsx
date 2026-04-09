@@ -57,7 +57,7 @@ function PulsaContent() {
       }
       setInquiryId(data.inquiry.inquiryId);
       setOperator(data.inquiry.operator || null);
-      setProducts(data.products.filter((p) => p.status === "available"));
+      setProducts(data.products.filter((p) => p.status === "active"));
       setStep("products");
     } catch (err) {
       setError(getApiErrorMessage(err));

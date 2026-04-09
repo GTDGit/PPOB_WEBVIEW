@@ -59,7 +59,7 @@ function TokenPlnContent() {
       }
       setInquiryId(data.inquiry.inquiryId);
       setCustomer(data.inquiry.customer || null);
-      setProducts(data.products.filter((p) => p.status === "available"));
+      setProducts(data.products.filter((p) => p.status === "active"));
       setStep("products");
     } catch (err) {
       setError(getApiErrorMessage(err));

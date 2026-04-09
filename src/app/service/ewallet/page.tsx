@@ -71,7 +71,7 @@ function EwalletContent() {
         return;
       }
       setInquiryId(data.inquiry.inquiryId);
-      setProducts(data.products.filter((p) => p.status === "available"));
+      setProducts(data.products.filter((p) => p.status === "active"));
       setStep("products");
     } catch (err) {
       setError(getApiErrorMessage(err));
